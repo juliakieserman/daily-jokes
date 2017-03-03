@@ -1,0 +1,5 @@
+    <ul>
+      <li class="text" *ngFor="let joke of jokes | async">
+        {{joke.$value}}
+      </li>
+    </ul>
