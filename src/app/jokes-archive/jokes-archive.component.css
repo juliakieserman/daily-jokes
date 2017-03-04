@@ -1,0 +1,9 @@
+.card {
+    background-color: #F5CE28;
+}
+
+.center-cols > .col {
+    float: none;
+    display: inline-block;
+    text-align: initial;
+}
