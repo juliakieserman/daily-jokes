@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JokesService } from '../services/jokes.service';
 import { JokeObj } from '../joke-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-jokes-archive',
@@ -12,7 +13,7 @@ export class JokesArchiveComponent implements OnInit {
 
   private jokes: JokeObj[] = [];
 
-  constructor(private jokeService: JokesService) { 
+  constructor(private jokeService: JokesService, private router: Router) { 
   }
 
   ngOnInit() {
@@ -29,8 +30,7 @@ export class JokesArchiveComponent implements OnInit {
   }
 
   private goToJoke(item: JokeObj) {
-    console.log("got this");
-    console.log(item);
+    this.router.navigate(['/home', item.date]);
   }
 
 }

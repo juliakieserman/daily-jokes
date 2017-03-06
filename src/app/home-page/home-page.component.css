@@ -1,0 +1,13 @@
+.parallax-container {
+    background-color: #F2EEE2;
+}
+
+.date-today {
+    color: #43C0F6;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.joke-content {
+    font-size: 15px;
+}
