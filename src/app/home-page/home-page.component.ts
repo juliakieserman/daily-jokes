@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { FirebaseObjectObservable, AngularFire } from 'angularfire2';
+import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { JokeObj } from '../joke-model';
 import { RatingObj } from '../rating-model';
@@ -15,8 +15,13 @@ export class HomePageComponent implements OnInit {
   private todaySearch;
   private monthObj = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   private jokeToday: FirebaseObjectObservable<JokeObj>;
+  private jokeRatings: FirebaseListObservable<number>;
   private sub: any;
   private passedData: string;
+  private searchToday: string;
+   
+    //for testing purposes...replace with searchDate
+  public dummyDate: String = "2005-05-05";
 
   /* rating variables */
   public max: number = 5;
@@ -38,10 +43,13 @@ export class HomePageComponent implements OnInit {
     });
 
     if(this.passedData) {
-      this.loadDailyJoke(this.passedData);
+      this.searchToday = this.passedData
     } else {
-      this.getTodayDate();
+      this.searchToday = this.getTodayDate();
     }
+
+    //load data
+    this.loadDailyJoke(this.searchToday);
   }
 
   ngOnDestroy() {
@@ -57,9 +65,9 @@ export class HomePageComponent implements OnInit {
 
     // format dates to search database and display on page
     this.todayDisplay = month + ' ' + dd + ', ' + yyyy;
-    this.todaySearch = yyyy + '-' + (this.addZero(mm)) + '-' + this.addZero(dd);
+    let searchDate = yyyy + '-' + (this.addZero(mm)) + '-' + this.addZero(dd);
 
-    this.loadDailyJoke(this.todaySearch);
+    return searchDate;
 }
 
 private addZero(value: Number) {
@@ -70,11 +78,12 @@ private addZero(value: Number) {
   return paddedValue;
 }
 
-private loadDailyJoke(searchDate: string) {
-  //for testing purposes...replace with searchDate
-  const dummyDate = "2005-05-05";
+  private loadDailyJoke(searchDate: string) {
+    //get joke object and bind
+    this.jokeToday = this._af.database.object('/jokes/' + this.dummyDate);
 
-  this.jokeToday = this._af.database.object('/jokes/' + dummyDate);
+    //get ratings for this joke
+    this.jokeRatings = this._af.database.list('/ratings/' + this.dummyDate);
   }
 
   /* rating functions */
@@ -90,10 +99,9 @@ private loadDailyJoke(searchDate: string) {
     //acknowledge submission to user
     this.submittedRating = true;
     this.isReadonly = true;
-
-    //TODAY SEARCH WILL NEED TO BE REPLACED WITH A USER ID
-    const databaseObj = this._af.database.object('/ratings/' + this.todaySearch);
-    databaseObj.set({ rating: this.rate });
+   
+   
+    this.jokeRatings.push(this.rate);
   }
 
 
