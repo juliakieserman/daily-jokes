@@ -24,7 +24,6 @@ export class CreateJokeComponent implements OnInit {
 
   ngOnInit() {
     this.newJoke = new JokeObj();
-    this.newJoke.ratings = [-1, -1];
   }
 
   private addToDB() {

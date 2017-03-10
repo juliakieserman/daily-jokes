@@ -1,26 +1,35 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { FirebaseListObservable} from 'angularfire2';
+import { FirebaseObjectObservable, AngularFire } from 'angularfire2';
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
-import { RatingComponent } from '../rating/rating.component';
 import { JokeObj } from '../joke-model';
-import { JokesService } from '../services/jokes.service';
+import { RatingObj } from '../rating-model';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css'],
-  providers: [JokesService]
+  styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
 
   private todayDisplay;
   private todaySearch;
   private monthObj = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  private jokeToday: JokeObj;
+  private jokeToday: FirebaseObjectObservable<JokeObj>;
   private sub: any;
   private passedData: string;
 
-  constructor(private jokeService: JokesService, private route: ActivatedRoute) {}
+  /* rating variables */
+  public max: number = 5;
+  public rate: number = 5;
+  public isReadonly: boolean = false;
+  public overStar: number;
+  private submittedRating: boolean = false;
+
+  private _af;
+
+  constructor(private route: ActivatedRoute, af: AngularFire) {
+    this._af = af;
+  }
 
   ngOnInit() {
 
@@ -33,23 +42,23 @@ export class HomePageComponent implements OnInit {
     } else {
       this.getTodayDate();
     }
-
   }
 
-ngOnDestroy() {
-  this.sub.unsubscribe();
-}
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
-private getTodayDate() {
+  private getTodayDate() {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;
-    var month = this.monthObj[mm];
+    var month = this.monthObj[mm-1];
     var yyyy = today.getFullYear();
 
     // format dates to search database and display on page
     this.todayDisplay = month + ' ' + dd + ', ' + yyyy;
     this.todaySearch = yyyy + '-' + (this.addZero(mm)) + '-' + this.addZero(dd);
+
     this.loadDailyJoke(this.todaySearch);
 }
 
@@ -62,12 +71,30 @@ private addZero(value: Number) {
 }
 
 private loadDailyJoke(searchDate: string) {
-  this.jokeToday = new JokeObj();
-  
-  this.jokeService.getDailyJoke(searchDate).subscribe(
-    (data) => {
-      this.jokeToday = data[0];
-    });
+  //for testing purposes...replace with searchDate
+  const dummyDate = "2005-05-05";
+
+  this.jokeToday = this._af.database.object('/jokes/' + dummyDate);
   }
+
+  /* rating functions */
+  public hoverOver(value: number) {
+    this.overStar = value;
+  };
+
+  public resetStar() {
+    this.overStar = void 0;
+  }
+
+  public submitRating() {
+    //acknowledge submission to user
+    this.submittedRating = true;
+    this.isReadonly = true;
+
+    //TODAY SEARCH WILL NEED TO BE REPLACED WITH A USER ID
+    const databaseObj = this._af.database.object('/ratings/' + this.todaySearch);
+    databaseObj.set({ rating: this.rate });
+  }
+
 
 }
