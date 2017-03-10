@@ -11,3 +11,18 @@
 .joke-content {
     font-size: 15px;
 }
+
+.title {
+    color: #43C0f6;
+    text-align: center;
+}
+
+.stars {
+    font-size: 2em;
+    color: #F5CE2B;
+}
+
+.rating {
+    text-align: center;
+    font-size: 2.3em;
+}
