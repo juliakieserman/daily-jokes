@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { AngularFire, FirebaseListObservable, FirebaseRef } from 'angularfire2';
-
-export class JokeObj {
-  title: string;
-  description: string;
-  date: Date;
-}
+import { Router } from '@angular/router';
+import { JokeObj } from '../joke-model';
 
 @Component({
   selector: 'app-create-joke',
@@ -22,20 +18,20 @@ export class CreateJokeComponent implements OnInit {
   private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
 
-  constructor(af: AngularFire) { 
+  constructor(private af: AngularFire, private router: Router) { 
     this.options = new DatePickerOptions();
-    this.jokes = af.database.list('/jokes');
-
   }
 
   ngOnInit() {
     this.newJoke = new JokeObj();
+    this.newJoke.ratings = [-1, -1];
   }
 
   private addToDB() {
-    console.log("this is how the date is formatted");
-    console.log(this.newJoke.date);
-    this.jokes.push(this.newJoke);
+    const dateString = this.newJoke.date.toString();
+    const databaseObj = this.af.database.object('/jokes');
+    databaseObj.update({ [dateString]: this.newJoke });
+    this.router.navigate(['/home']);
   }
 
 
