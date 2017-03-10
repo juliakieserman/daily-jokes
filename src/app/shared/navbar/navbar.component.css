@@ -32,3 +32,8 @@ body {
   overflow:hidden;
   text-align:center;
 }
+
+.navbar {
+  background-color: #F18B84;
+  border-bottom: none;
+}

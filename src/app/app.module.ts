@@ -17,6 +17,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { JokesArchiveComponent } from './jokes-archive/jokes-archive.component';
 import { CreateJokeComponent } from './create-joke/create-joke.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     HomePageComponent,
     JokesArchiveComponent,
     CreateJokeComponent,
-    NavbarComponent
+    NavbarComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
