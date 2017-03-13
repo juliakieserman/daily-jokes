@@ -12,11 +12,13 @@ import { RatingModule } from 'ng2-bootstrap/rating';
 
 /* Components */
 import { AppComponent } from './app.component';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomePageComponent } from './home-page/home-page.component';
 import { JokesArchiveComponent } from './jokes-archive/jokes-archive.component';
 import { CreateJokeComponent } from './create-joke/create-joke.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -26,12 +28,19 @@ export const firebaseConfig = {
     messagingSenderId: "1016586563889"
 };
 
+const firebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect
+};
+
 const appRoutes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home/:date', component: HomePageComponent },
   { path: 'create', component: CreateJokeComponent },
-  { path: 'archives', component: JokesArchiveComponent }
+  { path: 'archives', component: JokesArchiveComponent },
+  { path: 'subscriptions', component: SubscriptionPageComponent },
+  { path: 'about', component: AboutPageComponent }
 ];
 
 @NgModule({
@@ -40,7 +49,9 @@ const appRoutes: Routes = [
     HomePageComponent,
     JokesArchiveComponent,
     CreateJokeComponent,
-    NavbarComponent
+    NavbarComponent,
+    SubscriptionPageComponent,
+    AboutPageComponent,
   ],
   imports: [
     CommonModule,
@@ -50,7 +61,8 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot(appRoutes),
     DatePickerModule,
-    RatingModule.forRoot()
+    RatingModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

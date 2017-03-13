@@ -15,7 +15,7 @@ export class HomePageComponent implements OnInit {
   private todaySearch;
   private monthObj = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   private jokeToday: FirebaseObjectObservable<JokeObj>;
-  private jokeRatings: FirebaseListObservable<number>;
+  private jokeRatings: FirebaseListObservable<any>;
   private sub: any;
   private passedData: string;
   private searchToday: string;
@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
   public overStar: number;
   private submittedRating: boolean = false;
 
-  private _af;
+  private _af: AngularFire;
 
   constructor(private route: ActivatedRoute, af: AngularFire) {
     this._af = af;
@@ -100,7 +100,7 @@ private addZero(value: Number) {
     this.submittedRating = true;
     this.isReadonly = true;
    
-   
+
     this.jokeRatings.push(this.rate);
   }
 

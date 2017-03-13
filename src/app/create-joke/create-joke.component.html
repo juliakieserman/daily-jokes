@@ -17,7 +17,12 @@
     </div>
     <br>
 
+    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx, .png, .jpg">
+
+
     <button class="waves-effect waves-light btn" type="submit" (click)="addToDB()"> Submit </button>
 
   </form>
+
+
 </div>

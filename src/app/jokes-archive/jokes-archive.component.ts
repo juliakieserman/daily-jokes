@@ -1,35 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { JokesService } from '../services/jokes.service';
+import { FirebaseListObservable, AngularFire } from 'angularfire2';
 import { JokeObj } from '../joke-model';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-jokes-archive',
   templateUrl: './jokes-archive.component.html',
-  styleUrls: ['./jokes-archive.component.css'],
-  providers: [JokesService]
+  styleUrls: ['./jokes-archive.component.css']
 })
 export class JokesArchiveComponent implements OnInit {
 
-  private jokes: JokeObj[] = [];
+  private jokes: FirebaseListObservable<any>;
+  private _af: AngularFire;
 
-  constructor(private jokeService: JokesService, private router: Router) { 
+  constructor(private af: AngularFire, private router: Router) { 
+    this._af = af;
   }
 
   ngOnInit() {
-    this.getJokes();
-  }
-
-  private getJokes() {
-    this.jokeService.getJokes().subscribe(
-      (jokes) => {
-        jokes.forEach(joke => {
-          this.jokes.push(joke);
-        });
-      });
+    //load jokes
+    this.jokes = this._af.database.list('/jokes');
   }
 
   private goToJoke(item: JokeObj) {
+    console.log("you wanna see the item");
+    console.log(item);
     //this.router.navigate(['/home', item.date]);
   }
 

@@ -24,6 +24,14 @@ export class CreateJokeComponent implements OnInit {
 
   ngOnInit() {
     this.newJoke = new JokeObj();
+
+    //init for file upload
+    var storageRef = firebase.storage.ref("folderName/file.jpg");
+    var fileUpload = document.getElementById("fileUpload");
+    fileUpload.on(‘change’, function(evt) {
+      var firstFile = evt.target.file[0]; // get the first file uploaded
+      var uploadTask = storageRef.put(firstFile);
+});
   }
 
   private addToDB() {
@@ -33,6 +41,9 @@ export class CreateJokeComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-
+  fileChange($event) {
+    this.newJoke.hasAsset = true;
+    console.log($event);
+  }
 
 }
