@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { DatePickerModule } from 'ng2-datepicker';
 import { CommonModule } from '@angular/common';
+import { ClarityModule } from 'clarity-angular';
 
 /* ng2-bootstrap modules */
 import { RatingModule } from 'ng2-bootstrap/rating';
@@ -19,6 +20,7 @@ import { CreateJokeComponent } from './create-joke/create-joke.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -52,6 +54,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     SubscriptionPageComponent,
     AboutPageComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -63,6 +66,7 @@ const appRoutes: Routes = [
     DatePickerModule,
     RatingModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+    ClarityModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

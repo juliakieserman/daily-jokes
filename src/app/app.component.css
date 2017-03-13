@@ -1,0 +1,7 @@
+.show-nav {
+    display: none;
+}
+
+.nav-activator:hover .show-nav {
+    display: block;
+}
