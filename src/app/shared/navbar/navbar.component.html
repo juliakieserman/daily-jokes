@@ -1,28 +1,25 @@
-<div class="navbar navbar-inverse navbar-fixed-top skyline">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" class="nav-text">About</a></li>
-        <li><a href="#" class="nav-text">Archives</a></li>
-        <li><a href="#" class="nav-text">Subscription</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
-
-<div class="wide">
-  	<div class="col-xs-5 line"><hr></div>
-    <div class="col-xs-2 logo">Logo</div>
-    <div class="col-xs-5 line"><hr></div>
-</div>
-
-<img src="../../../assets/temp-cover.png" style="background-color: #F18B84" class="img-fluid" alt="Responsive image">
-
-<!-- /.container -->
+<nav class="sidenav pink">
+  <section class="sidenav-content">
+        <a href="..." class="nav-link active">
+                    Nav Element 1
+                </a>
+                <a href="..." class="nav-link">
+                    Nav Element 2
+                </a>
+                <section class="nav-group collapsible">
+                    <input id="tabexample1" type="checkbox">
+                    <label for="tabexample1">Collapsible Nav Element</label>
+                    <ul class="nav-list">
+                        <li><a class="nav-link">Link 1</a></li>
+                        <li><a class="nav-link">Link 2</a></li>
+                    </ul>
+                </section>
+                <section class="nav-group">
+                    <input id="tabexample2" type="checkbox">
+                    <label for="tabexample2">Default Nav Element</label>
+                    <ul class="nav-list" *ngFor="let joke of jokes">
+                        <li><a class="nav-link">{{joke.title}}</a></li>
+                    </ul>
+                </section>
+            </section>
+        </nav>
