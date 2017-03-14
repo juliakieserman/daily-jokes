@@ -29,4 +29,8 @@ export class NavbarComponent implements OnInit {
       });
     }
 
+    goToJoke(joke) {
+      console.log(joke);
+    }
+
 }
