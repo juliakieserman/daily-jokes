@@ -54,7 +54,7 @@ export class CreateJokeComponent implements OnInit {
     this.isDropZoneOver = e;
   }
 
-  uploadImages() {
+  uploadImagesToFirebase() {
     this.newJoke.hasAsset = true;
     this.isEnabledUpload = false;
     this.assetService.uploadImagesToFirebase(this.files);

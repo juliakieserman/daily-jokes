@@ -17,7 +17,7 @@ export class NgDropFilesDirective {
     }
 
     @HostListener('drop', ['$event'])
-  public onDrop(event:any):void {
+    public onDrop(event:any):void {
     let transfer = this._getTransfer(event);
     if (!transfer) return;
 
