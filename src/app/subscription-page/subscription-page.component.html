@@ -1,0 +1,32 @@
+<form>
+    <div class="form-group">
+      <label for="email"> Email </label>
+      <input type="text" class="form-control" id="email" required [(ngModel)]="email.email" name="email">
+    </div>
+
+    <div class="form-group">
+            <label>Subscription Type</label>
+            <div class="radio">
+                <input type="radio" name="gridRadios" id="daily">
+                <label for="checkrads_9">Daily</label>
+            </div>
+            <div class="radio">
+                <input type="radio" name="gridRadios" id="weekly">
+                <label for="checkrads_10">Weekly</label>
+            </div>
+            <div class="radio">
+                <input type="radio" name="gridRadios" id="monthly">
+                <label for="checkrads_9">Monthly</label>
+            </div>
+        </div>
+
+</form>
+<button (click)="subscribe()"> Submit </button>
+
+<!--<div [hidden]="!loggedIn">
+  <p> Manage Your Subscription </p>
+</div>
+<div [hidden]="loggedIn">
+  <p> Log in to subscribe to daily, weekly, or monthly emails! </p>
+</div>
+<button (click)="appLogin()"> Log in </button>-->
