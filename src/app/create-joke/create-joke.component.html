@@ -23,15 +23,14 @@
     <br>
 
     <div class="form-group">
-            <label for="aForm_3">Associated asset?</label>
-            <div class="select">
-                <select id="aForm_3">
-                    <option>Yes</option>
-                    <option>No</option>
-                </select>
-            </div>
+        <label for="asset"> Has Assets? </label>
+            <select [(ngModel)]="newJoke.hasAsset" name="asset">
+  <option value=true>Yes </option>
+  <option selected value=false> No </option>
+</select>
         </div>
 
+   
     <!--<input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx, .png, .jpg">-->
 
 

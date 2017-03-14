@@ -22,12 +22,10 @@ export class CreateJokeComponent implements OnInit {
   private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
 
-
   //file upload variables
   isDropZoneOver: boolean = false;
   isEnabledUpload: boolean = true;
   files: Array<AssetObj[]> = [];
-
 
   constructor(
     private af: AngularFire, 
@@ -39,17 +37,9 @@ export class CreateJokeComponent implements OnInit {
 
   ngOnInit() {
     this.newJoke = new JokeObj();
-
-    //init for file upload
-    /*var storageRef = firebase.storage.ref("folderName/file.jpg");
-    var fileUpload = document.getElementById("fileUpload");
-    fileUpload.on(‘change’, function(evt) {
-      var firstFile = evt.target.file[0]; // get the first file uploaded
-      var uploadTask = storageRef.put(firstFile);
-});*/
   }
 
-  /* File upload functions */
+  /* Start file upload functions */
   public fileOverDropZone(e: any) {
     this.isDropZoneOver = e;
   }
@@ -57,6 +47,7 @@ export class CreateJokeComponent implements OnInit {
   uploadImagesToFirebase() {
     this.newJoke.hasAsset = true;
     this.isEnabledUpload = false;
+    const assetNum = this.files.length;
     this.assetService.uploadImagesToFirebase(this.files);
   }
 
@@ -64,34 +55,11 @@ export class CreateJokeComponent implements OnInit {
     this.files = [];
     this.isEnabledUpload = true;
   }
+  /* End file upload functions */
 
   private addToDB() {
     this.jokeService.addJoke(this.newJoke);
-   /* const dateString = this.newJoke.date.toString();
-    const databaseObj = this.af.database.object('/jokes');
-    databaseObj.update({ [dateString]: this.newJoke });*/
     this.router.navigate(['/home']);
   }
-
-  /*fileChange($event) {
-    this.newJoke.hasAsset = true;
-
-    
-    if (fileList.length > 0) {
-      let file: File = fileList[0];
-      let formData: FormData = new FormData();
-      console.log(file);
-      console.log(formData);
-    }
-
-    const storageRef = firebase.storage().ref();
-    const imageRef = storageRef.child('mountains.jpg');
-    const pathRef = storageRef.child('images/montains.jpg');
-
-    //var file = //fileAPI;
-    //ref.put(file).then()
-
-    console.log(event);
-  }*/
 
 }

@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { AssetObj } from '../models/asset-model';
 import * as firebase from 'firebase';
 import * as _ from 'lodash';
@@ -18,7 +18,7 @@ export class AssetsService {
         let storageRef = firebase.storage().ref();
         _.each(files, (item:AssetObj) => {
             item.isUploading = true;
-            let uploadTask: firebase.storage.UploadTask = storageRef.child('images/${item.file.name}').put(item.file);
+            let uploadTask: firebase.storage.UploadTask = storageRef.child('images/' + item.file.name).put(item.file);
 
             uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, 
             (snapshot) => item.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
@@ -32,8 +32,14 @@ export class AssetsService {
 
     }
 
-    public getAsset(count: number) {
+    public getAsset(title: string) {
         //return this.assetStorage[count];
+    }
+
+    public getAllAssets(): FirebaseListObservable<any[]> {
+        let list = this._af.database.list('/images');
+        console.log(list);
+        return list;
     }
 
     private saveAsset(image: any) {
