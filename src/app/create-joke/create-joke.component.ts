@@ -27,6 +27,9 @@ export class CreateJokeComponent implements OnInit {
   isEnabledUpload: boolean = true;
   files: Array<AssetObj[]> = [];
 
+  private fileName: string;
+  private fileNames: string[] = [];
+
   constructor(
     private af: AngularFire, 
     private router: Router, 
@@ -56,6 +59,11 @@ export class CreateJokeComponent implements OnInit {
     this.isEnabledUpload = true;
   }
   /* End file upload functions */
+
+  private addFileName() {
+    this.fileNames.push(this.fileName);
+    this.fileName = '';
+  }
 
   private addToDB() {
     this.jokeService.addJoke(this.newJoke);

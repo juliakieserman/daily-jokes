@@ -36,11 +36,11 @@ export class AssetsService {
         //return this.assetStorage[count];
     }
 
-    public getAllAssets(): FirebaseListObservable<any[]> {
+  /*  public getAllAssets(): FirebaseListObservable<any[]> {
         let list = this._af.database.list('/images');
         console.log(list);
         return list;
-    }
+    }*/
 
     private saveAsset(image: any) {
         this._af.database.list('/images').push(image);

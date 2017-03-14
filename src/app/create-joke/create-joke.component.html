@@ -29,11 +29,14 @@
   <option selected value=false> No </option>
 </select>
         </div>
-
    
     <!--<input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx, .png, .jpg">-->
 
-
+    <div class="form-group" [hidden]="!newJoke.hasAsset">
+        <label for="fileName"> Name of File </label>
+        <input type="text" class="form-control" id="fileName" required [(ngModel)]="fileName" name="fileName">
+        <button (click)="addFileName()"> Add </button>
+    </div>
 
     <button class="waves-effect waves-light btn" type="submit" (click)="addToDB()"> Submit </button>
 
