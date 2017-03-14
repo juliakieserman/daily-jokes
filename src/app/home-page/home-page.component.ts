@@ -84,6 +84,7 @@ private addZero(value: Number) {
 
     //get ratings for this joke
     this.jokeRatings = this._af.database.list('/ratings/' + this.dummyDate);
+
   }
 
   /* rating functions */

@@ -21,6 +21,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     SubscriptionPageComponent,
     AboutPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     DatePickerModule,
     RatingModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     ClarityModule.forRoot()
   ],
   providers: [],

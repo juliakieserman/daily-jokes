@@ -6,6 +6,7 @@ import { AngularFire, FirebaseListObservable, FirebaseRef, FirebaseObjectObserva
 export class JokesService {
     
     private _af;
+    public jokeCount: number = 0;
 
     constructor(af: AngularFire) {
         this._af = af;
@@ -25,6 +26,10 @@ export class JokesService {
         console.log("this is the observable");
         console.log(jokesObservable);
         jokesObservable.set({ ratings: updatedArray});
+    }
+
+    public getJokeCount() {
+        return this.jokeCount;
     }
 
 }

@@ -17,6 +17,7 @@ export class SubscriptionPageComponent implements OnInit {
   private loginService: LoginService;
   private emailService: EmailService;
   private loggedIn: boolean = false;
+  private subscriptionOptions = ['Daily', 'Weekly', 'Monthly'];
   private email: EmailObj;
 
   constructor(af: AngularFire, 
