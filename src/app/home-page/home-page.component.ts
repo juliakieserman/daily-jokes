@@ -104,5 +104,9 @@ private addZero(value: Number) {
     this.jokeRatings.push(this.rate);
   }
 
+      /* retrieve stored image */
+   // const storageRef = firebase.storage().ref().child('testString');
+   // storageRef.getDownloadURL().then(url => this.image = url);
+
 
 }

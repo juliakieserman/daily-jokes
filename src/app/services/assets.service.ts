@@ -14,7 +14,7 @@ export class AssetsService {
         this._af = af;
     }
 
-    public addAsset(files: Array<AssetObj[]>) {
+    public uploadImagesToFirebase(files: Array<AssetObj[]>) {
         let storageRef = firebase.storage().ref();
         _.each(files, (item:AssetObj) => {
             item.isUploading = true;

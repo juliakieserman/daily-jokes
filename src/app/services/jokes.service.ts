@@ -20,10 +20,7 @@ export class JokesService {
     }
 
     public submitRating(today: Date, updatedArray: number[]) {
-        console.log("in here?");
         const jokesObservable = this.getDailyJoke(today.toString());
-        console.log("this is the observable");
-        console.log(jokesObservable);
         jokesObservable.set({ ratings: updatedArray});
     }
 

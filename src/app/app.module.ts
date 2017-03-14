@@ -22,6 +22,8 @@ import { SubscriptionPageComponent } from './subscription-page/subscription-page
 //import { AboutPageComponent } from './about-page/about-page.component';
 import { HeaderComponent } from './shared/header/header.component';
 
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+
 export const firebaseConfig = {
     apiKey: "AIzaSyAq3BR1axTBqeqdqHWbqF68bPShUOiML8Y",
     authDomain: "jokes-website.firebaseapp.com",
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     SubscriptionPageComponent,
     //AboutPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    NgDropFilesDirective
   ],
   imports: [
     CommonModule,

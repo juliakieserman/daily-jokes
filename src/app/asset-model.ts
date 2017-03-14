@@ -7,6 +7,5 @@ export class AssetObj {
 
     public constructor(file: File, count: number) {
         this.file = file;
-        this.count = count;
     }
 }

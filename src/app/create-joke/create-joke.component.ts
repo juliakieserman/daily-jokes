@@ -11,7 +11,7 @@ import { AssetsService } from '../services/assets.service';
   selector: 'app-create-joke',
   templateUrl: './create-joke.component.html',
   styleUrls: ['./create-joke.component.css'],
-  providers: [JokesService]
+  providers: [JokesService, AssetsService]
 })
 
 export class CreateJokeComponent implements OnInit {
@@ -57,7 +57,7 @@ export class CreateJokeComponent implements OnInit {
   uploadImages() {
     this.newJoke.hasAsset = true;
     this.isEnabledUpload = false;
-    this.assetService.addAsset(this.files);
+    this.assetService.uploadImagesToFirebase(this.files);
   }
 
   clearFiles() {
