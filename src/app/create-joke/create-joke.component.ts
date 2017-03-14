@@ -3,11 +3,13 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { AngularFire, FirebaseListObservable, FirebaseRef } from 'angularfire2';
 import { Router } from '@angular/router';
 import { JokeObj } from '../joke-model';
+import { JokesService } from '../services/jokes.service';
 
 @Component({
   selector: 'app-create-joke',
   templateUrl: './create-joke.component.html',
-  styleUrls: ['./create-joke.component.css']
+  styleUrls: ['./create-joke.component.css'],
+  providers: [JokesService]
 })
 
 export class CreateJokeComponent implements OnInit {
@@ -18,7 +20,10 @@ export class CreateJokeComponent implements OnInit {
   private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
 
-  constructor(private af: AngularFire, private router: Router) { 
+  constructor(
+    private af: AngularFire, 
+    private router: Router, 
+    private jokeService: JokesService) { 
     this.options = new DatePickerOptions();
   }
 
@@ -35,9 +40,10 @@ export class CreateJokeComponent implements OnInit {
   }
 
   private addToDB() {
-    const dateString = this.newJoke.date.toString();
+    this.jokeService.addJoke(this.newJoke);
+   /* const dateString = this.newJoke.date.toString();
     const databaseObj = this.af.database.object('/jokes');
-    databaseObj.update({ [dateString]: this.newJoke });
+    databaseObj.update({ [dateString]: this.newJoke });*/
     this.router.navigate(['/home']);
   }
 

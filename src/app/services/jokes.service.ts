@@ -27,4 +27,10 @@ export class JokesService {
         jokesObservable.set({ ratings: updatedArray});
     }
 
+    public addJoke(jokeObj: JokeObj) {
+        const date = jokeObj.date.toString();
+        const databaseObj = this._af.database.object('/jokes');
+        databaseObj.update({ [date]: jokeObj});
+    }
+
 }
