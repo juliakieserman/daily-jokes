@@ -6,6 +6,7 @@ import { JokeObj } from '../models/joke-model';
 import { AssetObj } from '../models/asset-model';
 import { JokesService } from '../services/jokes.service';
 import { AssetsService } from '../services/assets.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-create-joke',
@@ -27,9 +28,6 @@ export class CreateJokeComponent implements OnInit {
   isEnabledUpload: boolean = true;
   files: Array<AssetObj[]> = [];
 
-  private fileName: string;
-  private fileNames: string[] = [];
-
   constructor(
     private af: AngularFire, 
     private router: Router, 
@@ -50,7 +48,7 @@ export class CreateJokeComponent implements OnInit {
   uploadImagesToFirebase() {
     this.newJoke.hasAsset = true;
     this.isEnabledUpload = false;
-    const assetNum = this.files.length;
+    this.addFileNames();
     this.assetService.uploadImagesToFirebase(this.files);
   }
 
@@ -60,9 +58,10 @@ export class CreateJokeComponent implements OnInit {
   }
   /* End file upload functions */
 
-  private addFileName() {
-    this.fileNames.push(this.fileName);
-    this.fileName = '';
+  private addFileNames() {
+    _.each(this.files, (item: AssetObj) => {
+      this.newJoke.assets.push(item.file.name);
+    });
   }
 
   private addToDB() {
