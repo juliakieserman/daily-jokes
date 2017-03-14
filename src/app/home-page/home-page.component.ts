@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
-import { JokeObj } from '../joke-model';
-import { RatingObj } from '../rating-model';
+import { JokeObj } from '../models/joke-model';
+import { RatingObj } from '../models/rating-model';
 
 @Component({
   selector: 'app-home-page',

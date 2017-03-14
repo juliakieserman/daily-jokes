@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JokeObj } from '../joke-model';
+import { JokeObj } from '../models/joke-model';
 import { AngularFire, FirebaseListObservable, FirebaseRef, FirebaseObjectObservable } from 'angularfire2';
 
 @Injectable()

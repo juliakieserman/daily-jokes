@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
-import { AssetObj } from '../asset-model';
+import { AssetObj } from '../models/asset-model';
 import * as firebase from 'firebase';
 import * as _ from 'lodash';
 

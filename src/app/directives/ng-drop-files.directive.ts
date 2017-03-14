@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, ElementRef, HostListener, Input, Output } from '@angular/core';
-import { AssetObj } from '../asset-model';
+import { AssetObj } from '../models/asset-model';
 import * as _ from 'lodash';
 
 @Directive({

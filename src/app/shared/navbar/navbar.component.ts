@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JokesService } from '../../services/jokes.service';
-import { JokeObj } from '../../joke-model';
+import { JokeObj } from '../../models/joke-model';
 
 @Component({
     selector: 'navbar',

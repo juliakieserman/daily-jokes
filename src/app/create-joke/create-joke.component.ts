@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { AngularFire, FirebaseListObservable, FirebaseRef } from 'angularfire2';
 import { Router } from '@angular/router';
-import { JokeObj } from '../joke-model';
-import { AssetObj } from '../asset-model';
+import { JokeObj } from '../models/joke-model';
+import { AssetObj } from '../models/asset-model';
 import { JokesService } from '../services/jokes.service';
 import { AssetsService } from '../services/assets.service';
 

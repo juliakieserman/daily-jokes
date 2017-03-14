@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EmailObj } from '../email-model';
+import { EmailObj } from '../models/email-model';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Md5 } from 'ts-md5/dist/md5';
 

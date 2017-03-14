@@ -3,7 +3,7 @@ import { AngularFire } from 'angularfire2';
 //import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { EmailService } from '../services/email.service';
-import { EmailObj } from '../email-model';
+import { EmailObj } from '../models/email-model';
 import { Md5 } from 'ts-md5/dist/md5';
 
 
