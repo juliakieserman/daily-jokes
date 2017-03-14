@@ -76,5 +76,5 @@ export class NgDropFilesDirective {
     return (fileType == ''? false: fileType.startsWith('image'));
   }
 
-}
+
 }
