@@ -19,7 +19,7 @@ import { JokesArchiveComponent } from './jokes-archive/jokes-archive.component';
 import { CreateJokeComponent } from './create-joke/create-joke.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SubscriptionPageComponent } from './subscription-page/subscription-page.component';
-import { AboutPageComponent } from './about-page/about-page.component';
+//import { AboutPageComponent } from './about-page/about-page.component';
 import { HeaderComponent } from './shared/header/header.component';
 
 export const firebaseConfig = {
@@ -42,7 +42,7 @@ const appRoutes: Routes = [
   { path: 'create', component: CreateJokeComponent },
   { path: 'archives', component: JokesArchiveComponent },
   { path: 'subscriptions', component: SubscriptionPageComponent },
-  { path: 'about', component: AboutPageComponent }
+ // { path: 'about', component: AboutPageComponent }
 ];
 
 @NgModule({
@@ -53,7 +53,7 @@ const appRoutes: Routes = [
     CreateJokeComponent,
     NavbarComponent,
     SubscriptionPageComponent,
-    AboutPageComponent,
+    //AboutPageComponent,
     HeaderComponent
   ],
   imports: [
@@ -65,7 +65,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     DatePickerModule,
     RatingModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     ClarityModule.forRoot()
   ],
   providers: [],
