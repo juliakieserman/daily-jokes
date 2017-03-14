@@ -6,18 +6,15 @@
 
     <div class="form-group">
             <label>Subscription Type</label>
-            <div class="radio">
-                <input type="radio" name="gridRadios" id="daily">
+           
+                <input type="radio" [(ngModel)]="email.subscriptionType" name="subType" id="daily" value="daily">
                 <label for="checkrads_9">Daily</label>
-            </div>
-            <div class="radio">
-                <input type="radio" name="gridRadios" id="weekly">
+           
+                <input type="radio" [(ngModel)]="email.subscriptionType" name="subType" id="weekly" value="weekly">
                 <label for="checkrads_10">Weekly</label>
-            </div>
-            <div class="radio">
-                <input type="radio" name="gridRadios" id="monthly">
+        
+                <input type="radio" [(ngModel)]="email.subscriptionType" name="subType" id="monthly" value="monthly">
                 <label for="checkrads_9">Monthly</label>
-            </div>
         </div>
 
 </form>
