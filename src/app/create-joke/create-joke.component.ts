@@ -26,12 +26,12 @@ export class CreateJokeComponent implements OnInit {
     this.newJoke = new JokeObj();
 
     //init for file upload
-    var storageRef = firebase.storage.ref("folderName/file.jpg");
+    /*var storageRef = firebase.storage.ref("folderName/file.jpg");
     var fileUpload = document.getElementById("fileUpload");
     fileUpload.on(‘change’, function(evt) {
       var firstFile = evt.target.file[0]; // get the first file uploaded
       var uploadTask = storageRef.put(firstFile);
-});
+});*/
   }
 
   private addToDB() {

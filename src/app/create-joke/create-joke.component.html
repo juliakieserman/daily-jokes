@@ -15,7 +15,22 @@
       <label for="date"> Date </label>
       <input type="date" class="form-control" id="date" required [(ngModel)]="newJoke.date" name="date">
     </div>
+
+    <div class="form-group:">
+      <label for="count"> Count </label>
+      <input type="number" class="form-control" id="count" required [(ngModel)]="newJoke.count" name="count">
+    </div>
     <br>
+
+    <div class="form-group">
+            <label for="aForm_3">Associated asset?</label>
+            <div class="select">
+                <select id="aForm_3">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+        </div>
 
     <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx, .png, .jpg">
 
