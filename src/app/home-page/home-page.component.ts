@@ -1,27 +1,31 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
-import { JokeObj } from '../joke-model';
-import { RatingObj } from '../rating-model';
+import { JokeObj } from '../models/joke-model';
+import { RatingObj } from '../models/rating-model';
+import { AssetsService } from '../services/assets.service';
+import { JokesService } from '../services/jokes.service';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+  providers: [AssetsService, JokesService]
 })
 export class HomePageComponent implements OnInit {
 
   private todayDisplay;
   private todaySearch;
   private monthObj = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  private jokeToday: FirebaseObjectObservable<JokeObj>;
+  //private jokeToday: FirebaseObjectObservable<JokeObj>;
+  private jokeToday: JokeObj;
   private jokeRatings: FirebaseListObservable<any>;
   private sub: any;
   private passedData: string;
   private searchToday: string;
    
     //for testing purposes...replace with searchDate
-  public dummyDate: String = "2005-05-05";
+  public dummyDate: String = "9999-04-04";
 
   /* rating variables */
   public max: number = 5;
@@ -32,7 +36,11 @@ export class HomePageComponent implements OnInit {
 
   private _af: AngularFire;
 
-  constructor(private route: ActivatedRoute, af: AngularFire) {
+  constructor(
+    private route: ActivatedRoute, 
+    private af: AngularFire,
+    private jokeService: JokesService,
+    private assetService: AssetsService) {
     this._af = af;
   }
 
@@ -80,11 +88,17 @@ private addZero(value: Number) {
 
   private loadDailyJoke(searchDate: string) {
     //get joke object and bind
-    this.jokeToday = this._af.database.object('/jokes/' + this.dummyDate);
+    this.jokeToday = this.jokeService.getDailyJoke(this.dummyDate);
+    console.log("this is the joke");
+    console.log(this.jokeToday);
 
     //get ratings for this joke
     this.jokeRatings = this._af.database.list('/ratings/' + this.dummyDate);
 
+    //if it has an asset, need to go get it
+    if (this.jokeToday.hasAsset) {
+      console.log("and we got an asset");
+    }
   }
 
   /* rating functions */
@@ -104,6 +118,10 @@ private addZero(value: Number) {
 
     this.jokeRatings.push(this.rate);
   }
+
+      /* retrieve stored image */
+   // const storageRef = firebase.storage().ref().child('testString');
+   // storageRef.getDownloadURL().then(url => this.image = url);
 
 
 }

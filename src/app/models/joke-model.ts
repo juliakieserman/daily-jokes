@@ -6,4 +6,5 @@ export class JokeObj {
   date: Date;
   count: number;
   hasAsset: boolean;
+  assets: string[];
 }

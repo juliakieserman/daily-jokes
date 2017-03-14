@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { AngularFire, FirebaseListObservable, FirebaseRef } from 'angularfire2';
 import { Router } from '@angular/router';
-import { JokeObj } from '../joke-model';
+import { JokeObj } from '../models/joke-model';
+import { AssetObj } from '../models/asset-model';
+import { JokesService } from '../services/jokes.service';
+import { AssetsService } from '../services/assets.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-create-joke',
   templateUrl: './create-joke.component.html',
-  styleUrls: ['./create-joke.component.css']
+  styleUrls: ['./create-joke.component.css'],
+  providers: [JokesService, AssetsService]
 })
 
 export class CreateJokeComponent implements OnInit {
@@ -18,32 +23,51 @@ export class CreateJokeComponent implements OnInit {
   private jokes: FirebaseListObservable<any[]>;
   private newJoke: JokeObj;
 
-  constructor(private af: AngularFire, private router: Router) { 
+  //file upload variables
+  isDropZoneOver: boolean = false;
+  isEnabledUpload: boolean = true;
+  files: Array<AssetObj[]> = [];
+
+  constructor(
+    private af: AngularFire, 
+    private router: Router, 
+    private jokeService: JokesService,
+    private assetService: AssetsService) { 
     this.options = new DatePickerOptions();
   }
 
   ngOnInit() {
     this.newJoke = new JokeObj();
+  }
 
-    //init for file upload
-    /*var storageRef = firebase.storage.ref("folderName/file.jpg");
-    var fileUpload = document.getElementById("fileUpload");
-    fileUpload.on(‘change’, function(evt) {
-      var firstFile = evt.target.file[0]; // get the first file uploaded
-      var uploadTask = storageRef.put(firstFile);
-});*/
+  /* Start file upload functions */
+  public fileOverDropZone(e: any) {
+    this.isDropZoneOver = e;
+  }
+
+  uploadImagesToFirebase() {
+    this.newJoke.hasAsset = true;
+    this.isEnabledUpload = false;
+    this.addFileNames();
+    this.assetService.uploadImagesToFirebase(this.files);
+  }
+
+  clearFiles() {
+    this.files = [];
+    this.isEnabledUpload = true;
+  }
+  /* End file upload functions */
+
+  private addFileNames() {
+    this.newJoke.assets = [];
+    _.each(this.files, (item: AssetObj) => {
+      this.newJoke.assets.push(item.file.name);
+    });
   }
 
   private addToDB() {
-    const dateString = this.newJoke.date.toString();
-    const databaseObj = this.af.database.object('/jokes');
-    databaseObj.update({ [dateString]: this.newJoke });
+    this.jokeService.addJoke(this.newJoke);
     this.router.navigate(['/home']);
-  }
-
-  fileChange($event) {
-    this.newJoke.hasAsset = true;
-    console.log($event);
   }
 
 }

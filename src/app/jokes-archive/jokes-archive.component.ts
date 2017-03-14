@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable, AngularFire } from 'angularfire2';
-import { JokeObj } from '../joke-model';
+import { JokeObj } from '../models/joke-model';
 import { Router } from '@angular/router';
 
 @Component({

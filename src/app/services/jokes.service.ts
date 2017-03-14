@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JokeObj } from '../joke-model';
+import { JokeObj } from '../models/joke-model';
 import { AngularFire, FirebaseListObservable, FirebaseRef, FirebaseObjectObservable } from 'angularfire2';
 
 @Injectable()
@@ -21,15 +21,14 @@ export class JokesService {
     }
 
     public submitRating(today: Date, updatedArray: number[]) {
-        console.log("in here?");
         const jokesObservable = this.getDailyJoke(today.toString());
-        console.log("this is the observable");
-        console.log(jokesObservable);
         jokesObservable.set({ ratings: updatedArray});
     }
 
-    public getJokeCount() {
-        return this.jokeCount;
+    public addJoke(jokeObj: JokeObj) {
+        const date = jokeObj.date.toString();
+        const databaseObj = this._af.database.object('/jokes');
+        databaseObj.update({ [date]: jokeObj});
     }
 
 }
