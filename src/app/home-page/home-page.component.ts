@@ -17,14 +17,15 @@ export class HomePageComponent implements OnInit {
   private todayDisplay;
   private todaySearch;
   private monthObj = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  private jokeToday: FirebaseObjectObservable<JokeObj>;
+  //private jokeToday: FirebaseObjectObservable<JokeObj>;
+  private jokeToday: JokeObj;
   private jokeRatings: FirebaseListObservable<any>;
   private sub: any;
   private passedData: string;
   private searchToday: string;
    
     //for testing purposes...replace with searchDate
-  public dummyDate: String = "2005-05-05";
+  public dummyDate: String = "9999-04-04";
 
   /* rating variables */
   public max: number = 5;
@@ -87,12 +88,17 @@ private addZero(value: Number) {
 
   private loadDailyJoke(searchDate: string) {
     //get joke object and bind
-    this.jokeToday = this._af.database.object('/jokes/' + this.dummyDate);
+    this.jokeToday = this.jokeService.getDailyJoke(this.dummyDate);
+    console.log("this is the joke");
+    console.log(this.jokeToday);
 
     //get ratings for this joke
     this.jokeRatings = this._af.database.list('/ratings/' + this.dummyDate);
 
     //if it has an asset, need to go get it
+    if (this.jokeToday.hasAsset) {
+      console.log("and we got an asset");
+    }
   }
 
   /* rating functions */
