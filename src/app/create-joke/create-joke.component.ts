@@ -59,6 +59,7 @@ export class CreateJokeComponent implements OnInit {
   /* End file upload functions */
 
   private addFileNames() {
+    this.newJoke.assets = [];
     _.each(this.files, (item: AssetObj) => {
       this.newJoke.assets.push(item.file.name);
     });
