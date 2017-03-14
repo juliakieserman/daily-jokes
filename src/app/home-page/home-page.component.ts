@@ -3,11 +3,14 @@ import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'a
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { JokeObj } from '../models/joke-model';
 import { RatingObj } from '../models/rating-model';
+import { AssetsService } from '../services/assets.service';
+import { JokesService } from '../services/jokes.service';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+  providers: [AssetsService, JokesService]
 })
 export class HomePageComponent implements OnInit {
 
@@ -32,7 +35,11 @@ export class HomePageComponent implements OnInit {
 
   private _af: AngularFire;
 
-  constructor(private route: ActivatedRoute, af: AngularFire) {
+  constructor(
+    private route: ActivatedRoute, 
+    private af: AngularFire,
+    private jokeService: JokesService,
+    private assetService: AssetsService) {
     this._af = af;
   }
 
@@ -84,6 +91,8 @@ private addZero(value: Number) {
 
     //get ratings for this joke
     this.jokeRatings = this._af.database.list('/ratings/' + this.dummyDate);
+
+    //if it has an asset, need to go get it
   }
 
   /* rating functions */
