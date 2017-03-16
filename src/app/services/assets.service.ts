@@ -1,17 +1,19 @@
-import { Injectable, OnInit } from '@angular/core';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { Injectable, Inject } from '@angular/core';
+import { AngularFire, FirebaseObjectObservable, FirebaseListObservable, FirebaseApp } from 'angularfire2';
 import { AssetObj } from '../models/asset-model';
 import * as firebase from 'firebase';
 import * as _ from 'lodash';
 
-//https://github.com/jlmonteagudo/upload-firebase/blob/master/src/app/services/upload-images.service.ts
 @Injectable()
 export class AssetsService {
     private _af;
+    private firebaseApp;
     private assets: FirebaseObjectObservable<any[]>;
+    private IMAGES_FOLDER: string = 'images/';
 
-    constructor(af: AngularFire) {
+    constructor(af: AngularFire, @Inject(FirebaseApp) firebaseApp: firebase.app.App) {
         this._af = af;
+        this.firebaseApp = firebaseApp;
     }
 
     public uploadImagesToFirebase(files: Array<AssetObj[]>) {
@@ -32,14 +34,17 @@ export class AssetsService {
 
     }
 
-    public getAsset(title: string) {
-        //return this.assetStorage[count];
-    }
-
-  /*  public getAllAssets(): FirebaseListObservable<any[]> {
-        let list = this._af.database.list('/images');
-        console.log(list);
-        return list;
+    /* TO-DO: figure out how to work this with observables and move functionality into service */
+    /*public getAsset(title: string) {
+        const path = this.IMAGES_FOLDER + title;
+        let image: string;
+        const storageRef = this.firebaseApp.storage().ref().child(path);
+        storageRef.getDownloadURL().then(
+            url => {
+                image = url;
+                return image;
+            }
+        )
     }*/
 
     private saveAsset(image: any) {

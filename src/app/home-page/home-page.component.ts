@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
+import { FirebaseObjectObservable, FirebaseListObservable, AngularFire, FirebaseApp } from 'angularfire2';
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { JokeObj } from '../models/joke-model';
 import { RatingObj } from '../models/rating-model';
@@ -27,6 +27,8 @@ export class HomePageComponent implements OnInit {
     //for testing purposes...replace with searchDate
   public dummyDate: String = "9999-04-04";
 
+  private assets: string[];
+
   /* rating variables */
   public max: number = 5;
   public rate: number = 5;
@@ -35,13 +37,16 @@ export class HomePageComponent implements OnInit {
   private submittedRating: boolean = false;
 
   private _af: AngularFire;
+  private firebaseApp;
 
   constructor(
     private route: ActivatedRoute, 
     private af: AngularFire,
     private jokeService: JokesService,
-    private assetService: AssetsService) {
-    this._af = af;
+    private assetService: AssetsService,
+    @Inject(FirebaseApp) firebaseApp: firebase.app.App) {
+      this._af = af;
+      this.firebaseApp = firebaseApp;
   }
 
   ngOnInit() {
@@ -85,19 +90,34 @@ private addZero(value: Number) {
   }
   return paddedValue;
 }
-
-  private loadDailyJoke(searchDate: string) {
+  
+private loadDailyJoke(searchDate: string) {
     //get joke object and bind
-    this.jokeToday = this.jokeService.getDailyJoke(this.dummyDate);
-    console.log("this is the joke");
-    console.log(this.jokeToday);
+    this.jokeService.getDailyJoke(this.dummyDate).subscribe(data => {
+      this.jokeToday = data;
+      this.assetHandler();
+    });
 
     //get ratings for this joke
     this.jokeRatings = this._af.database.list('/ratings/' + this.dummyDate);
 
-    //if it has an asset, need to go get it
+  }
+
+  private assetHandler() {
     if (this.jokeToday.hasAsset) {
-      console.log("and we got an asset");
+      
+      this.assets = [];
+      for (var i=0; i < this.jokeToday.assets.length; i++) {
+        let path = 'images/' + this.jokeToday.assets[i];
+        let image: string;
+        const storageRef = this.firebaseApp.storage().ref().child(path);
+        storageRef.getDownloadURL().then(
+            url => {
+                image = url;
+                this.assets.push(image);
+            }
+        )
+      }
     }
   }
 
@@ -118,10 +138,5 @@ private addZero(value: Number) {
 
     this.jokeRatings.push(this.rate);
   }
-
-      /* retrieve stored image */
-   // const storageRef = firebase.storage().ref().child('testString');
-   // storageRef.getDownloadURL().then(url => this.image = url);
-
 
 }
