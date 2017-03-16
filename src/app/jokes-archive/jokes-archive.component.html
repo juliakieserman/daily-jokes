@@ -1,7 +1,31 @@
 <div *ngIf="jokes">
+<div class="row">
+  <div class="col-lg-4" *ngFor="let joke of jokes | async" (click)="goToJoke(joke)">
+    <div class="card">
+      <div class="card-block">
+        <div class="card-header">
+        {{joke.title}}
+      </div>
+      <div class="card-text">
+        {{joke.description | slice:0:75}}... 
+        <br>
+      </div>
+      <div class="card-footer">
+        {{joke.date}}
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--<div *ngIf="jokes">
   <div class="container home-base">
+      <div *ngFor="let joke of jokes | async" (click)="goToJoke(joke)">
       <div class="row">
-        <div *ngFor="let joke of jokes | async" (click)="goToJoke(joke)">
+        <div class="col-m-4">
           <div class="panel panel-default">
             <div class="panel-body card-style">
               <span>{{joke.title}}</span>
@@ -9,7 +33,8 @@
               <p class="right-align"> {{joke.date}}</p>
             </div>
         </div>
+        </div>
           </div>
         </div>
   </div>
-</div>
+</div>-->
