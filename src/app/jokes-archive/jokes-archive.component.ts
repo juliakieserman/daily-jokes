@@ -13,6 +13,11 @@ export class JokesArchiveComponent implements OnInit {
   private jokes: FirebaseListObservable<any>;
   private _af: AngularFire;
 
+  /* rating variables */
+  public max: number = 5;
+  public rating: number = 5;
+  public isReadOnly: boolean = true;
+
   constructor(private af: AngularFire, private router: Router) { 
     this._af = af;
   }
