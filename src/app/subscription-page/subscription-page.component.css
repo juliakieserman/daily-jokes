@@ -1,0 +1,21 @@
+.tester {
+    text-align: center;
+    background-color: #F81B84;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.time-text {
+    font-size: 3em;
+    color: white;
+}
+
+.custom-grid {
+    border: none;
+}
+
+.banner {
+    background-color: #F81B84;
+    width: 100%;
+    height: 25%;
+}

@@ -64,8 +64,8 @@ export class SubscriptionPageComponent implements OnInit {
 
   sendMail() {
     this.emailService.sendEmail().subscribe(
-      s => console.log(s),
-      e => console.log(e)
+      response => this.handleResponse(response),
+        error => this.handleResponse(error)
     )
   }
 
@@ -74,5 +74,18 @@ export class SubscriptionPageComponent implements OnInit {
     this.emailService.addEmail(this.email, hash);
     this.router.navigate(['/home']);
   }
+
+   handleResponse(response){
+      // console.log(`msg is: {response.status}`);
+ 
+      if(response.status =='success'){
+        alert('tg it worked');
+      }
+ 
+      if(response.status =='error'){
+        alert('ugh this is german and not working');
+      }
+    }
+
 
 }
