@@ -66,6 +66,8 @@ export class CreateJokeComponent implements OnInit {
   }
 
   private addToDB() {
+    this.newJoke.description = this.newJoke.description.replace(/\n/g, "<br />");
+
     this.jokeService.addJoke(this.newJoke);
     this.router.navigate(['/home']);
   }
