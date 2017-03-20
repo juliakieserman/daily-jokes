@@ -1,8 +1,8 @@
 <nav class="sidenav pink">
   <section class="sidenav-content">
-      <section class="nav-group">
+      <section class="nav-group collapsible">
           <input id="tabexample2" type="checkbox">
-              <label for="tabexample2">The Dailys</label>
+              <label for="tabexample2">The Last 5 Days</label>
               <ul class="nav-list" *ngFor="let joke of jokes">
                 <li><a class="nav-link" (click)="goToJoke(joke)">{{joke.count}} - {{joke.title}}</a></li>
               </ul>

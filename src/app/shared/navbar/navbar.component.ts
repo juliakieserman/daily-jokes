@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JokesService } from '../../services/jokes.service';
 import { Router } from '@angular/router';
 import { JokeObj } from '../../models/joke-model';
+import { FirebaseListObservable } from 'angularfire2';
 
 @Component({
     selector: 'navbar',
@@ -12,7 +13,6 @@ import { JokeObj } from '../../models/joke-model';
 export class NavbarComponent implements OnInit {
 
     private jokes: JokeObj[] = [];
-    private jokeCount: number = 0;
     
     constructor(private jokeService: JokesService, private router: Router) {}
 
@@ -21,13 +21,12 @@ export class NavbarComponent implements OnInit {
     }
 
     private getJokes() {
-    this.jokeService.getJokes().subscribe(
-      (jokes) => {
-        jokes.forEach(joke => {
-          this.jokes.push(joke);
-          this.jokeCount++;
+      this.jokeService.getLastFive().subscribe(
+        (jokes) => {
+          jokes.forEach(joke => {
+            this.jokes.push(joke);
+          });
         });
-      });
     }
 
     goToJoke(joke) {

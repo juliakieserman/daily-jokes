@@ -1,63 +1,31 @@
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-              <span class=pull-right>{{jokeToday?.title}}</span>
-              <span class="pull-left">{{jokeToday?.date}}</span>
-            </div>
-            <div class="card-block">
-                <div class="card-text">
-                    {{jokeToday?.description}}
-                </div>
-                <div class="card-img" [hidden] = "">
-                  <div *ngFor="let img of assets">
-                    <img [src]="img">
-                </div>
-            </div>
-            <div class="card-footer">
-              <div class="rating">
+<div class="container">
+  <div *ngIf="jokeToday">
+    <img src="../assets/skyline.svg">
+    <div class="row center">
+      <span class="header-text"> {{jokeToday.title}} </span>
+    </div>
+    <div class="row">
+      <div class="description-text" [innerHTML]="jokeToday.description"> </div>
+    </div>
+    
+    <div class="row" *ngIf="jokeToday.hasAsset">
+      <div *ngFor="let img of assets">
+        <img class="img-responsive img-center" [src]="img">
+      </div>
+    </div>
+
+    <div class="center">
                 <rating class="stars" [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
                   (onHover)="hoverOver($event)" (onLeave)="resetStar()"
                   [titles]="['one','two','three']">
                 </rating> 
-                <div [hidden]="!submittedRating">
+                <div style="font-family: 'ostrich-sans-rounded'" [hidden]="!submittedRating">
                   <p> Thanks for the feedback! </p>
                 </div>
                 <div [hidden]="submittedRating">
                   <button type="submit" class="btn btn-primary" (click)="submitRating()">Submit</button>
                 </div>
               </div>
-            </div>
-        </div>
-    </div>
+              
+  </div>
 </div>
-
-
-<!--<div *ngIf="jokeToday">
-  <div class="container" style="background-color: #F18B84">
-      <div class="joke-content">
-        <h1 class="title"> {{ (jokeToday | async)?.title}}</h1>
-        <p class="description"> {{ (jokeToday | async)?.description}} </p>
-        <div class="row center">-->
-         <!--<a href="#writing" id="was_download-button" class="btn btn-large waves-effect waves-light grey darken-4">Get Started</a>-->
-         <!-- <p class="date-today"> {{todayDisplay}} </p>
-        </div>
-        <br><br>
-      </div>-->
-
-    <!-- start rating -->
-   <!-- <div class="rating">
-    <rating class="stars" [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
-        (onHover)="hoverOver($event)" (onLeave)="resetStar()"
-        [titles]="['one','two','three']">
-    </rating> 
-    <div [hidden]="!submittedRating">
-      <p> Thanks for the feedback! </p>
-    </div>
-    <div [hidden]="submittedRating">
-      <button type="button" class="btn-round" (click)="submitRating()">Submit</button>
-    </div>
-    </div>
-
-</div>
-</div>-->

@@ -30,7 +30,7 @@ export class JokesArchiveComponent implements OnInit {
   private goToJoke(item: JokeObj) {
     console.log("you wanna see the item");
     console.log(item);
-    //this.router.navigate(['/home', item.date]);
+    this.router.navigate(['/home', item.date]);
   }
 
 }

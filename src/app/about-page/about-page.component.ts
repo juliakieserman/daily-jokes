@@ -21,7 +21,7 @@ export class AboutPageComponent implements OnInit {
     let startDate = this.jokeService.getStartDate();
     const endDate = new Date();
     let randomDate = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
-    let param = randomDate.getFullYear() + '-' + this.addZero(randomDate.getDay()) + '-' + this.addZero(randomDate.getMonth());
+    let param = randomDate.getFullYear() + '-' + this.addZero(randomDate.getMonth()+1) + '-' + this.addZero(randomDate.getDate());
     this.router.navigate(['/home', param]);
   }
 
@@ -29,6 +29,8 @@ export class AboutPageComponent implements OnInit {
     let paddedValue;
     if (value < 10) {
       paddedValue = '0' + value;
+    } else {
+      paddedValue = value;
     }
     
     return paddedValue;

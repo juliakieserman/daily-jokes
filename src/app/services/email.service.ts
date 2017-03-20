@@ -15,6 +15,9 @@ export class EmailService {
         this._af = af;
     }
 
+
+    //https://hooks.zapier.com/hooks/catch/2087894/m7hxle/
+
     public addEmail(email: EmailObj, hash: any) {
         const databaseObj = this._af.database.object('/emails');
         databaseObj.update({ [hash]: email });
