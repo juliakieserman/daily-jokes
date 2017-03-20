@@ -2,6 +2,60 @@
 
 /* 
 ----------------
+   Cicle Font 
+----------------
+*/
+@font-face {
+    font-family: 'cicle-fina-italic';
+    src: url('./fonts/cicle/Cicle-Fina-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-fina';
+    src: url('./fonts/cicle/Cicle-Fina.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-gordita-italic';
+    src: url('./fonts/cicle/Cicle-Gordita-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-gordita';
+    src: url('./fonts/cicle/Cicle-Gordita.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-semi-italic';
+    src: url('./fonts/cicle/Cicle-Semi-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-semi';
+    src: url('./fonts/cicle/Cicle-Semi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-shadow';
+    src: url('./fonts/cicle/Cicle-Shadow.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 
+----------------
 Ostrich Sans Font 
 ----------------
 */
