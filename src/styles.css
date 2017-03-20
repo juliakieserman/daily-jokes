@@ -9,9 +9,63 @@ Weston Light Font
 @font-face {
     font-family: 'weston-light';
      src: url('./fonts/weston-light/Weston_Light_Free.eot');
-    src: url('./fonts/weston-light/Weston_Light_Free.ttf') format('truetype'),
+     src: url('./fonts/weston-light/Weston_Light_Free.ttf') format('truetype'),
          url('./fonts/weston-light/Weston_Light_Free.woff') format('woff'),
          url('./fonts/weston-light/Weston_Light_Free.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 
+----------------
+Cicle Font 
+----------------
+*/
+@font-face {
+    font-family: 'cicle-fina-italic';
+    src: url('./fonts/cicle/Cicle-Fina-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-fina';
+    src: url('./fonts/cicle/Cicle-Fina.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-gordita-italic';
+    src: url('./fonts/cicle/Cicle-Gordita-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-gordita';
+    src: url('./fonts/cicle/Cicle-Gordita.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-semi-italic';
+    src: url('./fonts/cicle/Cicle-Semi-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-semi';
+    src: url('./fonts/cicle/Cicle-Semi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cicle-shadow';
+    src: url('./fonts/cicle/Cicle-Shadow.ttf') format('truetype');
+>>>>>>> d0c1b7b34c1675d3bc8db5d5fde09cb02a57f454
     font-weight: normal;
     font-style: normal;
 }
