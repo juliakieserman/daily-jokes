@@ -43,7 +43,9 @@ export class SubscriptionPageComponent implements OnInit {
   ngOnInit() {
     //this.loggedIn = this.loginService.checkLogin();
     this.email = new EmailObj();
-    this.getCalendarValues();
+    console.log("THIS IS WHAT I WANT");
+    console.log(this.emailService.getDailySubscribers());
+    //this.getCalendarValues();
   }
 
   getCalendarValues() {
@@ -60,13 +62,6 @@ export class SubscriptionPageComponent implements OnInit {
 
   appLogin() {
     //this.loginService.login();
-  }
-
-  sendMail() {
-    this.emailService.sendEmail().subscribe(
-      response => this.handleResponse(response),
-        error => this.handleResponse(error)
-    )
   }
 
   subscribe() {
