@@ -4,6 +4,9 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+const API_KEY = process.env.MAILGUN_API_KEY;
+const API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/appdaa3ee4c6b7d4a63af1502ec885c99f2.mailgun.org"
+const mailgun = require('mailgun-js')({apiKey: API_KEY, domain: API_URL});
 
 // Get our API routes
 const api = require('./server/routes/api');
