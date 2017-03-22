@@ -64,6 +64,10 @@ export class SubscriptionPageComponent implements OnInit {
     //this.loginService.login();
   }
 
+  testEmail() {
+    this.emailService.testEmail();
+  }
+
   subscribe() {
     let hash = Md5.hashStr(this.email.email);
     this.emailService.addEmail(this.email, hash);
